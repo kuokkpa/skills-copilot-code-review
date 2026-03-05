@@ -63,11 +63,12 @@ def require_teacher(teacher_username: Optional[str]) -> Dict[str, Any]:
 
 def serialize_announcement(doc: Dict[str, Any]) -> Dict[str, Any]:
     """Convert Mongo document into API response payload."""
+    expires_on = doc.get("expires_on") or doc.get("date")
     return {
         "id": str(doc["_id"]),
         "message": doc["message"],
         "starts_on": doc.get("starts_on"),
-        "expires_on": doc["expires_on"]
+        "expires_on": expires_on
     }
 
 
